@@ -29,6 +29,8 @@ class CapTheme {
   static const Color secondary = Color.fromRGBO(126, 130, 153, 1) ;
 
   static const Color primary_light = Color.fromRGBO(225, 240, 255 ,1) ;
+  static const Color primary_lighter = Color.fromRGBO(225, 240, 255 ,1) ;
+  static const Color info_lighter = Color.fromRGBO(203, 176, 252, 1.0) ;
   static const Color success_lighter = Color.fromRGBO(201, 247, 245, 1) ;
   static const Color success_light = Color.fromRGBO(27, 197, 189, 1) ;
   static const Color success_dark = Color.fromRGBO(133, 200, 192, 1) ;
@@ -51,8 +53,30 @@ class CapTheme {
         return CapTheme.warning ;
       case 'info' :
         return CapTheme.info ;
+      case 'muted' :
+        return CapTheme.secondary ;
       default :
         return CapTheme.dark ;
+    }
+  }
+
+  static Color convertStringColorLighter( String colorString ) {
+    switch( colorString )
+    {
+      case 'success' :
+        return CapTheme.success_lighter ;
+      case 'danger' :
+        return CapTheme.danger_lighter  ;
+      case 'primary' :
+        return CapTheme.primary_lighter  ;
+      case 'warning' :
+        return CapTheme.warning_lighter  ;
+      case 'info' :
+        return CapTheme.info_lighter  ;
+      case 'muted' :
+        return CapTheme.silver  ;
+      default :
+        return CapTheme.white  ;
     }
   }
 

@@ -43,7 +43,6 @@ class DashboardController extends UserControllerCore
         title : res.data['data']['title'] ,
         text : res.data['data']['sub_title'] ,
         image : res.data['data']['image'] ,
-        commentsCount : res.data['data']['comments_count'] ,
         likesCount : res.data['data']['likes_count'] ,
       );
     }
@@ -64,9 +63,9 @@ class DashboardController extends UserControllerCore
       dangerToast( context: context ,title: "Error" ,message:  res.error ) ;
     }
     loadingToggleLatestNewsLike.value = false ;
+    /// TODO : RESTART OR ALERT USER
   }
 
-  // TODO : fetch from api
   void fetchSummary() async {
     var res = await _apiService.getWithDelay("/api/user/get-account-statistics") ;
     if( res.runtimeType == GoodResponse ) {
@@ -97,17 +96,27 @@ class DashboardController extends UserControllerCore
           realChartData: realChartData  ,
       );
     }
+    /// TODO : RESTART OR ALERT USER
   }
 
-  // TODO : fetch from api
   void fetchVerification() async {
-    await Future.delayed( const Duration( seconds: 2 ) ) ;
-    verification.value = VerificationModel(
-      addressIsVerified: true ,
-      identityIsVerified: false ,
-      phoneIsVerified: false ,
-      verificationPercent: 25 ,
-    );
+    var res = await _apiService.getWithDelay("/api/user/get-user-verification-status") ;
+    if( res.runtimeType == GoodResponse ) {
+      res as GoodResponse;
+      verification.value = VerificationModel(
+        identityIsVerified: res.data['data']['identity_is_verified'] ,
+        identityStatusColor: res.data['data']['identity_status_color'] ,
+        identityStatusText: res.data['data']['identity_status_text'] ,
+        addressIsVerified: res.data['data']['address_is_verified'],
+        addressStatusColor: res.data['data']['address_status_color'],
+        addressStatusText: res.data['data']['address_status_text'],
+        phoneIsVerified: res.data['data']['phone_is_verified'] ,
+        phoneStatusColor: res.data['data']['phone_status_color'] ,
+        phoneStatusText: res.data['data']['phone_status_text'] ,
+        verificationPercent: res.data['data']['verification_process'] ,
+      );
+    }
+    /// TODO : RESTART OR ALERT USER
   }
 
   // TODO : fetch from api

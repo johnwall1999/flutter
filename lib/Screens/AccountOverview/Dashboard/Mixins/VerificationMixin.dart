@@ -4,7 +4,6 @@ import 'package:flutter_app/Ui/Chart/CapPieChart.dart';
 import 'package:flutter_app/Ui/Grid/CapCard.dart';
 import 'package:flutter_app/Ui/Grid/CapFullWidth.dart';
 import 'package:flutter_app/Ui/Grid/CapTheme.dart';
-import 'package:flutter_app/Ui/Text/CapTextH6.dart';
 
 class VerificationMixin {
 
@@ -42,21 +41,21 @@ class VerificationMixin {
 
           // Identity
           CapFullWidth(
-              child :  verificationStatusRow( Icons.person , model.identityIsVerified , "Identity")
+              child :  verificationStatusRow( Icons.person , model.identityStatusText , "Identity" ,model.identityStatusColor )
           ),
 
           CapFullWidth(child: Container() ,height: 10) ,
 
           // Address
           CapFullWidth(
-              child :  verificationStatusRow( Icons.assignment_outlined , model.addressIsVerified , "Address")
+              child :  verificationStatusRow( Icons.assignment_outlined , model.addressStatusText , "Address" ,model.addressStatusColor )
           ),
 
           CapFullWidth(child: Container() ,height: 10) ,
 
           // Phone
           CapFullWidth(
-              child :  verificationStatusRow( Icons.phone_outlined , model.phoneIsVerified , "Phone")
+              child :  verificationStatusRow( Icons.phone_outlined , model.phoneStatusText , "Phone" ,model.phoneStatusColor )
           ),
 
           CapFullWidth(child: Container() ,height: 15 ) ,
@@ -66,11 +65,11 @@ class VerificationMixin {
   );
 
 
-  Widget verificationStatusRow( IconData icon ,bool valid ,String type ) => Padding(
+  Widget verificationStatusRow( IconData icon ,String status ,String type ,String color ) => Padding(
     padding: const EdgeInsets.symmetric( horizontal: 12.0 ) ,
     child: Container(
       decoration: BoxDecoration(
-          color: valid ? CapTheme.success_lighter : CapTheme.warning_lighter ,
+          color: CapTheme.convertStringColorLighter( color ) ,
           shape: BoxShape.rectangle ,
           borderRadius: BorderRadius.circular( 5.0 )
       ),
@@ -93,7 +92,7 @@ class VerificationMixin {
                       child: Icon(
                         icon ,
                         size: 23 ,
-                        color : valid ? CapTheme.success_light : CapTheme.warning_light ,
+                        color : CapTheme.convertStringColor( color ) ,
                       ),
                     )
                     ,
@@ -120,9 +119,9 @@ class VerificationMixin {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              valid ? "Verified" : "Pending",
+                              status,
                               style: TextStyle(
-                                color: valid ? CapTheme.success_light : CapTheme.warning_light ,
+                                color: CapTheme.convertStringColor( color ) ,
                                 fontSize: 10 ,
                               ),
                             ),

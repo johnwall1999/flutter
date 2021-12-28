@@ -73,19 +73,6 @@ class NewsMixin {
                             color: loadingLike ? CapTheme.secondary : CapTheme.danger,
                             onPressed: loadingLike ? () {} : () => toggleLoading( context ) ,
                           ),
-                          CapTextButton(
-                            text: Row(
-                              children: [
-                                const Icon( Icons.comment_rounded ,size: 22 ) ,
-                                Padding(
-                                  child: Text( model.commentsCount.toString() ,style: CapTheme.normalTextStyle ) ,
-                                  padding: const EdgeInsets.symmetric( horizontal: 5.0 )
-                                )
-                              ],
-                            ) ,
-                            color: CapTheme.primary ,
-                            onPressed: () => {} ,
-                          ),
                         ],
                       ),
                     ),
